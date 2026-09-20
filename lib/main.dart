@@ -20,7 +20,7 @@ class MainApp extends StatelessWidget {
             child: Text('Birdie'),
           ),
         ),
-        body: const Center(child: Tile('A', HitType.hit)),
+        body: Center(child: GamePage()),
       ),
     );
   }
@@ -53,5 +53,17 @@ class Tile extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class GamePage extends StatelessWidget {
+  GamePage({super.key});
+
+  final Game _game = Game();
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: Replace with screen contents
+    return Container();
   }
 }
