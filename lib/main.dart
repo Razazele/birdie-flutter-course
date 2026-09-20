@@ -64,6 +64,20 @@ class GamePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Replace with screen contents
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        spacing: 5.0,
+        children: [
+          for (final guess in _game.guesses)
+            Row(
+              spacing: 5.0,
+              children: [
+                for (final letter in guess) Tile(letter.char, letter.type),
+              ],
+            ),
+        ],
+      ),
+    );
   }
 }
