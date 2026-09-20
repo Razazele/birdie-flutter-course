@@ -40,6 +40,7 @@ class Tile extends StatelessWidget {
       child: Center(
         child: Text(
           letter.toUpperCase(),
+          //Toma el color en base al contexto definido por cada objeto tile creado
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
