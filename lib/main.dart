@@ -99,6 +99,13 @@ class GuessInput extends StatelessWidget {
 
   final FocusNode _focusNode = FocusNode();
 
+  //Refactor logica para submit boton y textField
+  void _onSubmit() {
+    onSubmitGuess(_textEditingController.text.trim());
+    _textEditingController.clear();
+    _focusNode.requestFocus();
+  }
+
   @override
   Widget build(BuildContext context) {
     //next steps are for UI
@@ -118,9 +125,7 @@ class GuessInput extends StatelessWidget {
               autofocus: true,
               focusNode: _focusNode,
               onSubmitted: (input) {
-                onSubmitGuess(_textEditingController.text.trim());
-                _textEditingController.clear();
-                _focusNode.requestFocus();
+                _onSubmit();
               },
             ), //TextField
           ), //Padding
@@ -129,9 +134,7 @@ class GuessInput extends StatelessWidget {
           padding: EdgeInsets.zero,
           icon: const Icon(Icons.arrow_circle_up),
           onPressed: () {
-            onSubmitGuess(_textEditingController.text.trim());
-            _textEditingController.clear();
-            _focusNode.requestFocus();
+            _onSubmit();
           },
         ),
       ],
