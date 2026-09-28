@@ -87,6 +87,10 @@ class GuessInput extends StatelessWidget {
 
   final void Function(String) onSubmitGuess;
 
+  //In Dart, it's good practice to use the _ wildcard to hide the input to a function that'll never be used. The preceding example does so.
+  //Permite manejar el texto insertado en el campo textField
+  final TextEditingController _textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     //next steps are for UI
@@ -102,6 +106,11 @@ class GuessInput extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(35)),
                 ),
               ),
+              controller: _textEditingController,
+              onSubmitted: (input) {
+                print(_textEditingController.text);
+                _textEditingController.clear();
+              },
             ),
           ),
         ),
