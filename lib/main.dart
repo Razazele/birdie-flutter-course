@@ -122,8 +122,17 @@ class GuessInput extends StatelessWidget {
                 _textEditingController.clear();
                 _focusNode.requestFocus();
               },
-            ),
-          ),
+            ), //TextField
+          ), //Padding
+        ), //Expanded
+        IconButton(
+          padding: EdgeInsets.zero,
+          icon: const Icon(Icons.arrow_circle_up),
+          onPressed: () {
+            onSubmitGuess(_textEditingController.text.trim());
+            _textEditingController.clear();
+            _focusNode.requestFocus();
+          },
         ),
       ],
     );
