@@ -76,6 +76,12 @@ class GamePage extends StatelessWidget {
                 for (final letter in guess) Tile(letter.char, letter.type),
               ],
             ),
+          GuessInput(
+            onSubmitGuess: (guess) {
+              //Handle Guess
+              print(guess);
+            },
+          ),
         ],
       ),
     );
@@ -84,7 +90,7 @@ class GamePage extends StatelessWidget {
 
 class GuessInput extends StatelessWidget {
   GuessInput({super.key, required this.onSubmitGuess});
-
+  //Es para que el usuario pueda manejar la data recibida al hacer un guess y usarla en logica externa a esta clase
   final void Function(String) onSubmitGuess;
 
   //In Dart, it's good practice to use the _ wildcard to hide the input to a function that'll never be used. The preceding example does so.
@@ -112,7 +118,7 @@ class GuessInput extends StatelessWidget {
               autofocus: true,
               focusNode: _focusNode,
               onSubmitted: (input) {
-                print(input);
+                onSubmitGuess(_textEditingController.text.trim());
                 _textEditingController.clear();
                 _focusNode.requestFocus();
               },
