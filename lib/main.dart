@@ -91,6 +91,8 @@ class GuessInput extends StatelessWidget {
   //Permite manejar el texto insertado en el campo textField
   final TextEditingController _textEditingController = TextEditingController();
 
+  final FocusNode _focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     //next steps are for UI
@@ -107,9 +109,12 @@ class GuessInput extends StatelessWidget {
                 ),
               ),
               controller: _textEditingController,
+              autofocus: true,
+              focusNode: _focusNode,
               onSubmitted: (input) {
-                print(_textEditingController.text);
+                print(input);
                 _textEditingController.clear();
+                _focusNode.requestFocus();
               },
             ),
           ),
