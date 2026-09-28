@@ -81,3 +81,15 @@ class GamePage extends StatelessWidget {
     );
   }
 }
+
+class GuessInput extends StatelessWidget {
+  GuessInput({super.key, required this.onSubmitGuess});
+
+  final void Function(String) onSubmitGuess;
+
+  @override
+  Widget build(BuildContext context) {
+    //next steps are for UI
+    return Container(); //Placeholder
+  }
+}
