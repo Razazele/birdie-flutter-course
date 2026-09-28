@@ -56,30 +56,41 @@ class Tile extends StatelessWidget {
   }
 }
 
-class GamePage extends StatelessWidget {
+class GamePage extends StatefulWidget {
   GamePage({super.key});
 
+  @override
+  State<GamePage> createState() => _GamePageState();
+}
+
+class _GamePageState extends State<GamePage> {
   final Game _game = Game();
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Replace with screen contents
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
-        spacing: 5.0,
         children: [
-          for (final guess in _game.guesses)
+          for (var guess in _game.guesses)
             Row(
-              spacing: 5.0,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (final letter in guess) Tile(letter.char, letter.type),
+                for (var letter in guess)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 2.5,
+                      vertical: 2.5,
+                    ),
+                    child: Tile(letter.char, letter.type),
+                  ),
               ],
             ),
           GuessInput(
-            onSubmitGuess: (guess) {
-              //Handle Guess
-              print(guess);
+            onSubmitGuess: (String guess) {
+              setState(() {
+                _game.guess(guess);
+              });
             },
           ),
         ],
@@ -88,11 +99,16 @@ class GamePage extends StatelessWidget {
   }
 }
 
-class GuessInput extends StatelessWidget {
+class GuessInput extends StatefulWidget {
   GuessInput({super.key, required this.onSubmitGuess});
   //Es para que el usuario pueda manejar la data recibida al hacer un guess y usarla en logica externa a esta clase
   final void Function(String) onSubmitGuess;
 
+  @override
+  State<GuessInput> createState() => _GuessInputState();
+}
+
+class _GuessInputState extends State<GuessInput> {
   //In Dart, it's good practice to use the _ wildcard to hide the input to a function that'll never be used. The preceding example does so.
   //Permite manejar el texto insertado en el campo textField
   final TextEditingController _textEditingController = TextEditingController();
@@ -101,7 +117,7 @@ class GuessInput extends StatelessWidget {
 
   //Refactor logica para submit boton y textField
   void _onSubmit() {
-    onSubmitGuess(_textEditingController.text.trim());
+    widget.onSubmitGuess(_textEditingController.text.trim());
     _textEditingController.clear();
     _focusNode.requestFocus();
   }
